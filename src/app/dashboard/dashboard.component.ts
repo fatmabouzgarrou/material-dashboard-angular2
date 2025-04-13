@@ -4,7 +4,7 @@ import * as Chartist from 'chartist';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'], // Verify this path
+  styleUrls: ['./dashboard.component.css'], // Verify this path
 })
 export class DashboardComponent implements OnInit {
   constructor() {}
