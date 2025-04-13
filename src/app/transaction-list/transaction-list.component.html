@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <h1>Tableau de bord des transactions</h1>
+  <div class="card filters-card">
+    <div class="card-header">
+      <h4 class="card-title">Filtres avancés</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
+        <div class="row filter-row">
+          <div class="col-md-3">
+            <label for="startDate">Date de début</label>
+            <input type="date" id="startDate" class="form-control" formControlName="startDate">
+          </div>
+          <div class="col-md-3">
+            <label for="endDate">Date de fin</label>
+            <input type="date" id="endDate" class="form-control" formControlName="endDate">
+          </div>
+          <div class="col-md-3">
+            <label for="minAmount">Montant min</label>
+            <input type="number" id="minAmount" class="form-control" formControlName="minAmount">
+          </div>
+          <div class="col-md-3">
+            <label for="maxAmount">Montant max</label>
+            <input type="number" id="maxAmount" class="form-control" formControlName="maxAmount">
+          </div>
+          <div class="col-md-3">
+            <label for="status">Statut</label>
+            <select id="status" class="form-control" formControlName="status">
+              <option value="">Tous</option>
+              <option value="Completed">Complétée</option>
+              <option value="Pending">En attente</option>
+              <option value="Failed">Échouée</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Appliquer les filtres</button>
+      </form>
+    </div>
+  </div>
+  <div class="card table-card">
+    <div class="card-header">
+      <h4 class="card-title">Liste des transactions</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <!-- Affichage des données brutes pour débogage -->
+        <div style="margin-bottom: 10px;">
+          <strong>Données brutes (filteredTransactions):</strong>
+        <!--<pre>{{ filteredTransactions | json }}</pre>-->
+        </div>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Motif</th>
+              <th>Montant total</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of trx ">
+              <td>{{ transaction.id }}</td>
+              <td>{{ transaction.motif}}</td>
+              <td>{{ transaction.totalAmount }}</td>
+              <td>{{ transaction.status }}</td>
+            </tr>
+            <tr *ngIf="!filteredTransactions || filteredTransactions.length === 0">
+              <td colspan="4" class="text-center">Aucune transaction disponible</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

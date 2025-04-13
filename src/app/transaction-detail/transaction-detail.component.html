@@ -1,0 +1,17 @@
+<div *ngIf="transaction" class="detail-container">
+    <h2>Détails de la transaction</h2>
+    <mat-card>
+      <mat-card-content>
+        <p><strong>Référence :</strong> {{ transaction.reference }}</p>
+        <p><strong>Date d'ouverture :</strong> {{ transaction.openDate | date }}</p>
+        <p><strong>Date de valeur :</strong> {{ transaction.valueDate | date }}</p>
+        <p><strong>Montant total :</strong> {{ transaction.totalAmount | currency:transaction.currency }}</p>
+        <p><strong>Montant transféré :</strong> {{ transaction.amountTransferred | currency:transaction.currency }}</p>
+        <p><strong>Montant bloqué :</strong> {{ transaction.blockedAmount | currency:transaction.currency }}</p>
+        <p><strong>Devise :</strong> {{ transaction.currency }}</p>
+        <p><strong>Motif :</strong> {{ transaction.transferReason }}</p>
+        <p><strong>Bénéficiaire :</strong> {{ transaction.beneficiary }}</p>
+        <p><strong>Banque bénéficiaire :</strong> {{ transaction.beneficiaryBank }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
