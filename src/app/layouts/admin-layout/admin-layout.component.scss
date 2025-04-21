@@ -1,71 +1,308 @@
-.wrapper {
-    position: relative;
-    top: 0;
-    height: 100vh;
+/* Style global pour une apparence moderne */
+div.wrapper {
+  font-family: 'Roboto', sans-serif !important;
+  background: #f1f3f5 !important; /* Gris clair pour l'ensemble */
+}
+
+/* Sidebar : Forcer la couleur et supprimer le défileur */
+div.wrapper div.sidebar {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 250px !important;
+  z-index: 1000 !important;
+  background: #2c3e50 !important; /* Bleu foncé */
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2) !important;
+  overflow-y: hidden !important; /* Supprime la barre de défilement */
+  height: 100vh !important;
+}
+
+/* Surcharge pour data-background-color */
+div.wrapper div.sidebar[data-background-color="white"] {
+  background: #2c3e50 !important;
+}
+
+/* Surcharge pour styles inline ou JavaScript */
+div.wrapper div.sidebar[style*="background"] {
+  background: #2c3e50 !important;
+}
+
+div.wrapper div.sidebar .sidebar-wrapper {
+  max-height: 100vh !important;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+  padding: 15px 0 !important;
+}
+
+div.wrapper div.sidebar .logo .simple-text {
+  color: #ffffff !important; /* Logo en blanc */
+  font-weight: 500 !important;
+  padding: 15px !important;
+  text-align: center !important;
+}
+
+div.wrapper div.sidebar .nav {
+  margin-top: 10px !important;
+}
+
+div.wrapper div.sidebar .nav li .nav-link {
+  color: #ffffff !important; /* Liens en blanc */
+  margin: 8px 10px !important;
+  padding: 12px 15px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  text-transform: capitalize !important;
+  transition: background 0.3s ease !important;
+}
+
+div.wrapper div.sidebar .nav li .nav-link:hover,
+div.wrapper div.sidebar .nav li .nav-link.active {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+}
+
+div.wrapper div.sidebar .nav li .nav-link i.material-icons {
+  color: #ffffff !important; /* Icônes en blanc */
+  margin-right: 10px !important;
+}
+
+/* Panneau principal */
+div.wrapper .main-panel {
+  width: calc(100% - 250px) !important;
+  margin-left: 250px !important;
+  background: #f1f3f5 !important; /* Gris clair */
+}
+
+/* Navbar */
+div.wrapper .main-panel .navbar {
+  background: #d1d5db !important; /* Gris moyen */
+  padding: 10px 15px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+div.wrapper .main-panel .navbar .navbar-brand {
+  color: #333333 !important; /* Texte sombre */
+  font-weight: 500 !important;
+}
+
+/* Contenu principal */
+div.wrapper .main-panel .content {
+  padding: 20px !important;
+  min-height: calc(100vh - 100px) !important;
+  background: #f1f3f5 !important;
+}
+
+/* Cartes statistiques (inchangées) */
+.card.card-stats {
+  background: #ffffff !important; /* Fond blanc */
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.card.card-stats:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card.card-stats .card-header {
+  border-radius: 8px 8px 0 0 !important;
+  padding: 15px !important;
+}
+
+.card.card-stats .card-header-success {
+  background: #2ecc71 !important; /* Vert */
+}
+
+.card.card-stats .card-header-warning {
+  background: #f39c12 !important; /* Orange */
+}
+
+.card.card-stats .card-header-danger {
+  background: #e74c3c !important; /* Rouge */
+}
+
+.card.card-stats .card-header-info {
+  background: #3498db !important; /* Bleu clair */
+}
+
+.card.card-stats .card-icon {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 6px !important;
+  padding: 10px !important;
+}
+
+.card.card-stats .card-icon i {
+  color: #ffffff !important;
+}
+
+.card.card-stats .card-category {
+  color: #666666 !important;
+  font-size: 14px !important;
+  margin: 10px 0 5px !important;
+}
+
+.card.card-stats .card-title {
+  color: #333333 !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+.card.card-stats .card-footer {
+  border-top: 1px solid #ecf0f1 !important;
+  padding: 10px 15px !important;
+  background: #f8f9fa !important;
+}
+
+.card.card-stats .stats {
+  color: #666666 !important;
+  font-size: 13px !important;
+}
+
+.card.card-stats .stats a {
+  color: #3498db !important;
+  text-decoration: none !important;
+}
+
+.card.card-stats .stats a:hover {
+  color: #2980b9 !important;
+}
+
+/* Cartes de graphiques : Nouvelles couleurs */
+.card.card-chart {
+  background: #f8f9fa !important; /* Gris très clair (nouveau fond) */
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card.card-chart .card-header {
+  padding: 15px !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+.card.card-chart .card-header-success {
+  background: #1e90ff !important; /* Bleu profond (nouvel en-tête succès) */
+}
+
+.card.card-chart .card-header-warning {
+  background: #f1c40f !important; /* Jaune doré (nouvel en-tête avertissement) */
+}
+
+.card.card-chart .card-header-danger {
+  background: #c0392b !important; /* Rouge foncé (nouvel en-tête danger) */
+}
+
+.card.card-chart .card-body {
+  padding: 15px !important;
+}
+
+.card.card-chart .card-title {
+  color: #333333 !important; /* Noir pour les titres */
+  font-weight: 500 !important;
+  margin-bottom: 10px !important;
+}
+
+.card.card-chart .card-category {
+  color: #4a4a4a !important; /* Gris foncé (nouveau texte des catégories) */
+  font-size: 14px !important;
+}
+
+.card.card-chart .card-footer {
+  border-top: 1px solid #ecf0f1 !important;
+  padding: 10px 15px !important;
+  background: #f8f9fa !important; /* Gris très clair */
+}
+
+/* Tableaux */
+.card .card-header-primary {
+  background: #9b59b6 !important; /* Violet */
+}
+
+.card .card-header-warning {
+  background: #f39c12 !important; /* Orange */
+}
+
+.card .table {
+  background: #ffffff !important;
+  border-radius: 6px !important;
+}
+
+.card .table thead th {
+  color: #333333 !important;
+  font-weight: 500 !important;
+  border-bottom: 1px solid #ecf0f1 !important;
+}
+
+.card .table tbody tr {
+  transition: background 0.2s ease !important;
+}
+
+.card .table tbody tr:hover {
+  background: #f8f9fa !important;
+}
+
+.card .table tbody td {
+  color: #333333 !important;
+  border-bottom: 1px solid #ecf0f1 !important;
+}
+
+.card .table-responsive {
+  overflow-x: auto !important;
+}
+
+/* Boutons */
+.btn.btn-primary {
+  background: #3498db !important;
+  border-color: #3498db !important;
+}
+
+.btn.btn-primary:hover {
+  background: #2980b9 !important;
+  border-color: #2980b9 !important;
+}
+
+.btn.btn-danger {
+  background: #e74c3c !important;
+  border-color: #e74c3c !important;
+}
+
+.btn.btn-danger:hover {
+  background: #c0392b !important;
+  border-color: #c0392b !important;
+}
+
+/* Onglets */
+.nav-tabs .nav-link {
+  color: #666666 !important;
+  font-weight: 500 !important;
+  transition: color 0.2s ease !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: #ffffff !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #ffffff !important;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  div.wrapper div.sidebar {
+    width: 200px !important;
+    background: #2c3e50 !important;
+    overflow-y: hidden !important;
   }
-  
-  .sidebar {
-    width: 260px;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    background: #fff;
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14);
+  div.wrapper div.sidebar[data-background-color="white"] {
+    background: #2c3e50 !important;
   }
-  
-  .sidebar .logo {
-    padding: 15px 30px;
-    text-align: center;
+  div.wrapper div.sidebar[style*="background"] {
+    background: #2c3e50 !important;
   }
-  
-  .sidebar-wrapper {
-    position: relative;
-    height: calc(100vh - 75px);
-    overflow: auto;
+  div.wrapper .main-panel {
+    width: calc(100% - 200px) !important;
+    margin-left: 200px !important;
   }
-  
-  .nav {
-    margin-top: 20px;
-  }
-  
-  .nav-item {
-    margin: 10px 15px;
-  }
-  
-  .nav-link {
-    display: flex;
-    align-items: center;
-    color: #333;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-  }
-  
-  .nav-link.active {
-    background: #f3e5f5;
-    color: #9c27b0;
-  }
-  
-  .nav-link i.material-icons {
-    margin-right: 10px;
-    font-size: 24px;
-  }
-  
-  .main-panel {
-    margin-left: 260px;
-    width: calc(100% - 260px);
-    background: #f4f6f9;
-    min-height: 100vh;
-  }
-  
-  .navbar {
-    padding: 15px 10px;
-    background: #fff;
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14);
-  }
-  
-  .content {
-    padding: 30px 15px;
-  }
+}
