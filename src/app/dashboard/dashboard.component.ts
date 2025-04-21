@@ -65,6 +65,7 @@ export class DashboardComponent implements OnInit {
     seq2 = 0;
   }
   ngOnInit() {
+    console.log('DashboardComponent loaded');
     /* Daily Sales Chart */
     const dataDailySalesChart: any = {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],

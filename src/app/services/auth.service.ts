@@ -1,45 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://votre-api-url/api/auth/login'; // Remplacez par l'URL de votre API
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
-
-  login(email: string, password: string): Observable<any> {
-    return this.http
-      .post<any>(this.apiUrl, { email, password })
-      .pipe(
-        tap((response) => {
-          if (response.token) {
-            this.saveToken(response.token);
-          }
-        }),
-        catchError((error) => {
-          console.error('Erreur lors de la connexion :', error);
-          return throwError(error);
-        })
-      );
+  login(credentials: { username: string, password: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
-  saveToken(token: string): void {
-    localStorage.setItem('token', token);
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('jwt');
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  isLoggedIn(): boolean {
-    return !!this.getToken();
+    return localStorage.getItem('jwt');
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('jwt');
+  }
+
+
+  generateOtp(): Observable<string> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+    });
+    return this.http.post(`${this.apiUrl}/otp/generate`, {}, { headers, responseType: 'text' });
+  }
+
+  verifyOtp(otpData: { otp: string, username: string }): Observable<string> {
+    return this.http.post(`${this.apiUrl}/otp/verify`, otpData, { responseType: 'text' });
+  }
+
+  getFraudData(): Observable<string> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+    });
+    return this.http.get(`${this.apiUrl}/fraud`, { headers, responseType: 'text' });
   }
 }

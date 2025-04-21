@@ -7,12 +7,16 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
 import { IconsComponent } from './icons/icons.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'user-profile', component: UserProfileComponent },
@@ -22,6 +26,7 @@ const routes: Routes = [
       { path: 'notifications', component: NotificationsComponent },
     ],
   },
+  { path: '**', redirectTo: 'dashboard' },
 ];
 
 @NgModule({
