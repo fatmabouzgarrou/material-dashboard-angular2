@@ -17,17 +17,13 @@ export class LoginComponent {
     console.log('Attempting login with credentials:', this.credentials);
     this.authService.login(this.credentials).subscribe({
       next: (response) => {
-        console.log('Login response:', response);
-        if (!response || !response.jwt) {
-          console.error('JWT not found in response!');
-          this.error = 'Invalid login response';
+        console.log('Login successful, response:', response);
+        if (!this.authService.isAuthenticated()) {
+          console.error('User is NOT authenticated after login');
+          this.error = 'Authentication failed: No token stored';
           return;
         }
-        localStorage.setItem('jwt', response.jwt);
-        console.log('JWT stored:', localStorage.getItem('jwt'));
-        this.authService.isAuthenticated() 
-          ? console.log('User is authenticated after login')
-          : console.error('User is NOT authenticated after login');
+        console.log('User is authenticated after login');
         this.router.navigate(['/dashboard']).then(success => {
           console.log('Navigation to dashboard successful:', success);
           if (!success) {

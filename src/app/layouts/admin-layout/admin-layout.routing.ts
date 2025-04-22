@@ -5,6 +5,7 @@ import { UserProfileComponent } from '../../user-profile/user-profile.component'
 import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { TransactionListComponent } from 'app/transaction-list/transaction-list.component';
+import { ManageUsersComponent } from 'app/manage-users/manage-users.component';
 
 export const AdminLayoutRoutes: Routes = [
      {
@@ -35,4 +36,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'transaction-list', component: TransactionListComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'notifications',  component: NotificationsComponent },
+    { path: 'manage-users', loadChildren: () => import('../../manage-users/manage-users.module').then(m => m.ManageUsersModule) }
 ];

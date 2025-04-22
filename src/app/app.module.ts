@@ -30,6 +30,7 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     LoginComponent,
+    
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

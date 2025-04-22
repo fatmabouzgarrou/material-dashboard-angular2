@@ -24,6 +24,7 @@ const routes: Routes = [
       { path: 'transaction-detail', component: TransactionDetailComponent },
       { path: 'icons', component: IconsComponent },
       { path: 'notifications', component: NotificationsComponent },
+      { path: 'manage-users', loadChildren: () => import('./manage-users/manage-users.module').then(m => m.ManageUsersModule) },
     ],
   },
   { path: '**', redirectTo: 'dashboard' },

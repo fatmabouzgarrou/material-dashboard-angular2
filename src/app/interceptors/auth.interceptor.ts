@@ -17,10 +17,14 @@ export class AuthInterceptor implements HttpInterceptor {
       authReq = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`)
       });
+      console.log('Adding Authorization header:', `Bearer ${token}`);
+    } else {
+      console.log('No token found, proceeding without Authorization header');
     }
 
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.error('HTTP error intercepted:', error);
         if (error.status === 401) {
           console.log('Unauthorized access, redirecting to login');
           this.authService.logout();
